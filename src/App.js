@@ -2,31 +2,33 @@
 import React, { Component } from 'react';
 
 import './App.css';
-import Weather from 'Weather'
 
-/** 
- * This example illustrates a simple react project 
- * that works with an external API. 
- * 
- * Take note of the comments they point common 
- * problems you will need to solve with React. 
- * 
+import Weather from './Weather';
+
+/**
+ * This example illustrates a simple react project
+ * that works with an external API.
+ *
+ * Take note of the comments they point common
+ * problems you will need to solve with React.
+ *
  * There are two ideas here
  * - Input/Controlled Component Pattern
- * - Conditionally Rendering components 
- * 
+ * - Conditionally Rendering components
+ *
  * The project has an input field where a user will
  * input a zip code. It finds weather data for that
- * zip and displays it in a component. 
- * 
+ * zip and displays it in a component.
+ *
  * */
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-    }
+      inputValue: '',
+    };
   }
 
   render() {
@@ -55,7 +57,7 @@ class App extends Component {
 
         {/** Conditionally render this component */}
         {/* {this.renderWeather()} */}
-        <Weather />
+        <Weather inputValue = {this.state.inputValue}/>
 
       </div>
     );
