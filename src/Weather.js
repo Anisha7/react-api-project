@@ -5,38 +5,14 @@ class Weather extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      inputValue: props.inputValue, // Used to hold value entered in the input field
-      weatherData: null, // Used to hold data loaded from the weather API
+    this.state = {// Used to hold value entered in the input field
+      weatherData: props.weatherData || null, // Used to hold data loaded from the weather API
     };
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    // ! Get your own API key ! 
-    const apikey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-    // Get the zip from the input
-    const zip = this.state.inputValue
-    // Form an API request URL with the apikey and zip
-    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${apikey}`
-    // Get data from the API with fetch
-    fetch(url).then((res) => {
-      // Handle the response stream as JSON
-      return res.json();
-    }).then((json) => {
-      // If the request was successful assign the data to component state
-      this.setState({ weatherData: json });
-      // ! This needs better error checking here or at renderWeather()
-      // It's possible to get a valid JSON response that is not weather
-      // data, for example when a bad zip code entered.
-    }).catch((err) => {
-      // If there is no data
-      this.setState({ weatherData: null }); // Clear the weather data we don't have any to display
-      // Print an error to the console.
-      console.log('-- Error fetching --');
-      console.log(err.message);
-      // You may want to display an error to the screen here. 
-    });
+    
   }
 
   render() {
