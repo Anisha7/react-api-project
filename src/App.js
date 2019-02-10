@@ -36,7 +36,7 @@ class App extends Component {
     // load weather data
     const apikey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
     // Form an API request URL with the apikey and zip
-    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${apikey}`
+    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${apikey}`;
     // Get data from the API with fetch
     fetch(url).then((res) => {
       // Handle the response stream as JSON
@@ -59,11 +59,15 @@ class App extends Component {
 
 
   render() {
+    let weatherComponent = (<p> No data available</p>)
+    if (this.weatherData != null) {
+      weatherComponent = (<Weather weatherdata={this.state.weatherdata} />)
+    }
     return (
       <div className="App">
         <InputZip submitZip={(zipcode) => this.submitZip(zipcode)} />
         {/* Display Weather component */}
-        <Weather weatherData = {this.weatherData} />
+        {weatherComponent}
       </div>
     );
   }
