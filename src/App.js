@@ -32,20 +32,20 @@ class App extends Component {
   }
 
   submitZip(zip) {
-    console.log(`Zip: ${zip}`);
+    // console.log(`Zip: ${zip}`);
     // load weather data
     const apikey = process.env.REACT_APP_OPENWEATHERMAP_API_KEY;
-    console.log(apikey)
+    // console.log(apikey)
 
     // Form an API request URL with the apikey and zip
     const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${apikey}`;
     // Get data from the API with fetch
     fetch(url).then((res) => {
-      console.log("HERE")
+      // console.log("HERE")
       // Handle the response stream as JSON
       return res.json();
     }).then((json) => {
-      console.log("JSON " + JSON.stringify(json))
+      // console.log("JSON " + JSON.stringify(json))
       // If the request was successful assign the data to component state
       this.setState({ weatherdata: json });
       // ! This needs better error checking here or at renderWeather()
@@ -64,7 +64,7 @@ class App extends Component {
 
   render() {
     let weatherComponent = (<p> No data available</p>)
-    if (this.weatherdata != null) {
+    if (this.state.weatherdata != null) {
       weatherComponent = (<Weather weatherdata={this.state.weatherdata} />);
     }
     return (

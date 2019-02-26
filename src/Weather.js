@@ -12,7 +12,7 @@ class Weather extends Component {
 
   render() {
     // This method returns undefined or a JSX component
-    if (this.state.weatherdata === null) {
+    if (this.props.weatherdata === null) {
       // If there is no data return undefined
       return null;
     }
@@ -22,10 +22,15 @@ class Weather extends Component {
     possible to get a JSON response for an invalid zip in which
     case the step below fails.
     */
-    console.log(this.state.weatherdata)
+    console.log(this.props.weatherdata)
+
+    if (this.props.weatherdata.cod === "404") {
+      return <p>{this.props.weatherdata.message}</p>
+    } 
+
     // Take the weather data apart to more easily populate the component
-    const { main, description, icon } = this.state.weatherdata.weather[0];
-    const { temp, pressure, humidity, temp_min, temp_max } = this.state.weatherdata.main;
+    const { main, description, icon } = this.props.weatherdata.weather[0];
+    const  { temp, pressure, humidity, temp_min, temp_max } = this.props.weatherdata.main;
         
     return (
         <div>
